@@ -1,0 +1,10 @@
+// mixing for clearing floats (for when all the childrens of a parent
+// are floats. Since then the parent collapse. This hack solves that issue.
+// This mixin needs to be used inside the parent whose children are all right/left floats.
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

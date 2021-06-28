@@ -1,0 +1,72 @@
+.btn {
+  &:link,
+  &:visited {
+    /*  relative positioning so the ::after element can be placed absolutely */
+    position: relative;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* to inline-block so it does not 
+        ocupy its own space and does not 
+        cover the heading text */
+    display: inline-block;
+    border-radius: 10rem;
+    /* We define on the initial state of the button that all the 
+        possible transitions will take 0.2s (basically the 
+        :hover and :active transitions */
+    transition: all 0.2s;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 10px 20px rgba($color-black, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  /* When clicking an element */
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 5px 10px rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &::after {
+    /* In order for an ::after pseudo element to appear on the 
+          page, we need to specify its content and display property.
+          Otherwise it will not be visible */
+    content: "";
+    display: inline-block;
+    /* The ::after sudo elemet is treated as a child of the main element, so 
+          height and width are referred in reference to the button. */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* We position it right behind the button and invisible with z-index -1 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* So the 0% animation state is applied from the beginning. 
+        Usually necessary when having an animation-delay (like in this case, 
+        of 0.75s) */
+    animation-fill-mode: backwards;
+  }
+}

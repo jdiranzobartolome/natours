@@ -1,0 +1,44 @@
+.header {
+  /*  position to relative so inner elements can be placed absolute */
+  position: relative;
+  height: 95vh;
+  /* More than one background image can be specified so we have two background images,
+          one on top of the other */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg);
+  background-size: cover;
+  /* the top of the image will always be at the top of the container 
+          so the top will not be cropped*/
+  background-position: top;
+  /* Using clip-path for clipping part of the image by specifying a polygon coordinates
+          of the part of the visible image. Defined clockwise.
+          Polygons can also be defined with an online tool called "clippy" which gives you coordinates for 
+          different types of complex polygons.  */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    /* The width will scale accordingly to thei image, so it is enough
+            will only specifying the height */
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    /* Top at 40% to compensate for the clipped part of the image */
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* To align its elements to the center */
+    text-align: center;
+  }
+}

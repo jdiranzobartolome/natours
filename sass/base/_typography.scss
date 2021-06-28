@@ -1,0 +1,78 @@
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* The font-size is now not used in rems so we take out the 
+     initial gloval 16px. The rems could be indicated here
+     but we will indicate them directly in the elements where we need them. */
+  /* font-size: 16px; */
+  line-height: 1.7;
+  /* choosing text-color */
+  color: $color-grey-dark;
+  padding: 3rem;
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+  margin-bottom: 6rem;
+  /* Hidding the backface of an element seems to solve a 
+    common animaiton buf in which the element which is animated
+    gets al ittle bit shaky */
+  backface-visibility: hidden;
+
+  &--main {
+    /* displaying the spans as block so one is on top of the other */
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /*
+      Other animation properties
+      animation-count: 3; 
+      animation-delay: 3s;
+       */
+  }
+
+  &--sub {
+    /* displaying the spans as block so one is on top of the other */
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    /* for finding this, we can use the inspector and modify the attribute directly in the browser
+      for finding out the correct value */
+    letter-spacing: 1.75rem;
+
+    /* Another way of defining the keyframes animation */
+    animation: moveInRight 1s ease-out;
+  }
+}
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+  // Having gradient color background in a text
+  // We clip the background to exactly the places where text is.
+  // Then, the text is made transparent so that background can be seen.
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+}

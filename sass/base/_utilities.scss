@@ -1,0 +1,12 @@
+// utility class for centering text. The text (h1, h2, p...) need to go inside
+// the div which will shave this utility class.
+.u-center-text {
+  // text-align centers any inline-block or inline element inside
+  // the block element
+  text-align: center;
+}
+
+//
+.u-margin-bottom-8 {
+  margin-bottom: 8rem;
+}

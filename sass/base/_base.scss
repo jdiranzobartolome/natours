@@ -1,0 +1,34 @@
+/* Simple reset by using the universal selector.
+Selecting also ::after, and ::before */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* slightly better practice for defining the box-sizing attribute. 
+  Instead of definingi it here, we make it inheritable, and define it 
+  in the body  */
+  box-sizing: inherit;
+}
+
+/*  Defining root font-size for using rem in the rest of the CSS. In that way,
+    changing sizes (for example, for mobile phone) is as easy as to only change 
+    the root font-size */
+html {
+  /* Defined as 10px to make our life easier calculating rem.
+    Now one rem will be 10px. However, if we define it as pixels, we overwrite the default
+    font-size of the browser (which can be modified by some users). Therefore, 
+    we calculate it as a percentage of the default browser font. 
+    The original default font-size of browsers is 16px, so we use a 
+    62.5% so the font-size is 10px (again, for doing rem calculations easily)*/
+
+  // This is not on typography file, because this is more for defining how much a
+  // rem will be. Rther than really defining the typography.
+  font-size: 62.5%;
+}
+
+/* fonts are inherited so it is better practice to write it down in the body 
+   than with universal selector */
+body {
+  box-sizing: border-box;
+}

@@ -1,0 +1,60 @@
+.row {
+  // One of the standards for grid rows is to make them a max of 1140px
+  max-width: $grid-width;
+  background-color: #eee;
+  // Centering a block element inside another block element
+  margin: 0 auto;
+
+  // "not" pseudo selector which can be mixed with other selectors.
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  @include clearfix;
+
+  // CSS attribute selector for selecting elementens whose class attribute starts with "col-"
+  [class^="col-"] {
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+
+  // definition of the different types of columns
+  .col-1-of-2 {
+    // scass variables in calc() function need to be wrapped within #{}
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    // scass variables in calc() function need to be wrapped within #{}
+    width: calc((100% - 2 *#{$gutter-horizontal}) / 3);
+  }
+
+  .col-2-of-3 {
+    // scass variables in calc() function need to be wrapped within #{}
+    width: calc(
+      2 * ((100% - 2 *#{$gutter-horizontal}) / 3) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-1-of-4 {
+    // scass variables in calc() function need to be wrapped within #{}
+    width: calc((100% - 3 *#{$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    // scass variables in calc() function need to be wrapped within #{}
+    width: calc(
+      2 * ((100% - 3 *#{$gutter-horizontal}) / 4) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    // scass variables in calc() function need to be wrapped within #{}
+    width: calc(
+      3 * ((100% - 3 *#{$gutter-horizontal}) / 4) + 2 *#{$gutter-horizontal}
+    );
+  }
+}

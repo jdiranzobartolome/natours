@@ -1,0 +1,244 @@
+/* Keyframe based Animations  */
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+/* Simple reset by using the universal selector.
+Selecting also ::after, and ::before */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* slightly better practice for defining the box-sizing attribute. 
+  Instead of definingi it here, we make it inheritable, and define it 
+  in the body  */
+  box-sizing: inherit; }
+
+/*  Defining root font-size for using rem in the rest of the CSS. In that way,
+    changing sizes (for example, for mobile phone) is as easy as to only change 
+    the root font-size */
+html {
+  /* Defined as 10px to make our life easier calculating rem.
+    Now one rem will be 10px. However, if we define it as pixels, we overwrite the default
+    font-size of the browser (which can be modified by some users). Therefore, 
+    we calculate it as a percentage of the default browser font. 
+    The original default font-size of browsers is 16px, so we use a 
+    62.5% so the font-size is 10px (again, for doing rem calculations easily)*/
+  font-size: 62.5%; }
+
+/* fonts are inherited so it is better practice to write it down in the body 
+   than with universal selector */
+body {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* The font-size is now not used in rems so we take out the 
+     initial gloval 16px. The rems could be indicated here
+     but we will indicate them directly in the elements where we need them. */
+  /* font-size: 16px; */
+  line-height: 1.7;
+  /* choosing text-color */
+  color: #777;
+  padding: 3rem; }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 6rem;
+  /* Hidding the backface of an element seems to solve a 
+    common animaiton buf in which the element which is animated
+    gets al ittle bit shaky */
+  backface-visibility: hidden; }
+  .heading-primary--main {
+    /* displaying the spans as block so one is on top of the other */
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /*
+      Other animation properties
+      animation-count: 3; 
+      animation-delay: 3s;
+       */ }
+  .heading-primary--sub {
+    /* displaying the spans as block so one is on top of the other */
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    /* for finding this, we can use the inspector and modify the attribute directly in the browser
+      for finding out the correct value */
+    letter-spacing: 1.75rem;
+    /* Another way of defining the keyframes animation */
+    animation: moveInRight 1s ease-out; }
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(to right, #7ed56f, #28b485);
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; }
+  .heading-secondary:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+
+.u-center-text {
+  text-align: center; }
+
+.u-margin-bottom-8 {
+  margin-bottom: 8rem; }
+
+.btn {
+  /* When clicking an element */ }
+  .btn:link, .btn:visited {
+    /*  relative positioning so the ::after element can be placed absolutely */
+    position: relative;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* to inline-block so it does not 
+        ocupy its own space and does not 
+        cover the heading text */
+    display: inline-block;
+    border-radius: 10rem;
+    /* We define on the initial state of the button that all the 
+        possible transitions will take 0.2s (basically the 
+        :hover and :active transitions */
+    transition: all 0.2s;
+    font-size: 1.6rem; }
+  .btn:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
+  .btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #fff; }
+  .btn::after {
+    /* In order for an ::after pseudo element to appear on the 
+          page, we need to specify its content and display property.
+          Otherwise it will not be visible */
+    content: "";
+    display: inline-block;
+    /* The ::after sudo elemet is treated as a child of the main element, so 
+          height and width are referred in reference to the button. */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* We position it right behind the button and invisible with z-index -1 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s; }
+  .btn--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* So the 0% animation state is applied from the beginning. 
+        Usually necessary when having an animation-delay (like in this case, 
+        of 0.75s) */
+    animation-fill-mode: backwards; }
+
+.header {
+  /*  position to relative so inner elements can be placed absolute */
+  position: relative;
+  height: 95vh;
+  /* More than one background image can be specified so we have two background images,
+          one on top of the other */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  /* the top of the image will always be at the top of the container 
+          so the top will not be cropped*/
+  background-position: top;
+  /* Using clip-path for clipping part of the image by specifying a polygon coordinates
+          of the part of the visible image. Defined clockwise.
+          Polygons can also be defined with an online tool called "clippy" which gives you coordinates for 
+          different types of complex polygons.  */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    /* The width will scale accordingly to thei image, so it is enough
+            will only specifying the height */
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    /* Top at 40% to compensate for the clipped part of the image */
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* To align its elements to the center */
+    text-align: center; }
+
+.row {
+  max-width: 114rem;
+  background-color: #eee;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 *6rem) / 3); }
+  .row .col-2-of-3 {
+    width: calc( 2 * ((100% - 2 *6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 *6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc( 2 * ((100% - 3 *6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc( 3 * ((100% - 3 *6rem) / 4) + 2 *6rem); }
+
+.section-about {
+  background-color: #f7f7f7;
+  padding: 25rem 0;
+  margin-top: -20vh; }
